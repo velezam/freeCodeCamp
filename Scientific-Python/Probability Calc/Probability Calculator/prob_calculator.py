@@ -12,14 +12,8 @@ class Hat:
             for i in range(value):
                 self.contents.append(key)
 
-        self.contents_copy = self.contents.copy()
-
-        print(self.contents)
-        print(self.contents_copy)
-
     def draw(self, num):
-        if num >= len(self.contents_copy):
-            self.contents_copy
+        if num > len(self.contents):
             return self.contents
 
         balls_drawn = []
@@ -27,24 +21,28 @@ class Hat:
         for i in range(num):
             rand_choice = random.choice(self.contents)
             balls_drawn.append(rand_choice)
-            self.contents_copy.remove(rand_choice)
+            self.contents.remove(rand_choice)
 
         return balls_drawn
 
 
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
-    # actual blue 3 red 2 green 6
-    # expected_balls {blue: 2, green: 1}
-
-    count = 0
+    successful_draws = 0
 
     for i in range(num_experiments):
-        balls_drawn = hat.draw(num_balls_drawn)
+        # make two copies of our original lists of expected balls and balls in hat
+        # we are modifying our args every loop and need to be able to reset back to their original values everytime
+        expected_balls_copy = copy.deepcopy(expected_balls)
+        hat_copy = copy.deepcopy(hat)
+        balls_drawn = hat_copy.draw(num_balls_drawn)
 
-        for color in expected_balls.keys():
-            if balls_drawn.count(color) < expected_balls[color]:
-                break
-            elif color == list(expected_balls)[-1]:
-                count += 1
+        # compare each ball drawn to expected balls, if they exist, remove one from expected balls successful_draws
+        for color in balls_drawn:
+            if color in expected_balls_copy:
+                expected_balls_copy[color] -= 1
 
-    return count / num_experiments
+        # if all the values in our expected balls list is 0 then we know we drew enough of each ball to be successful
+        if all(values <= 0 for values in expected_balls_copy.values()):
+            successful_draws += 1
+
+    return successful_draws / num_experiments
