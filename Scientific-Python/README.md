@@ -1,1 +1,1 @@
-# All projects which are required for the freeCodeCamp certification in Scientific Computing with Python
+# Amadeo Velez's solutions for the freeCodeCamp Scientific Computing with Python Certification
