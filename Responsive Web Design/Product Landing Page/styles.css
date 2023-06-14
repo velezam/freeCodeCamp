@@ -2,6 +2,7 @@
   --text: #251a08;
   --background: #f7ebda;
   --primary-button: #7ae1b8;
+  --primary-button-darker: #45b387;
   --secondary-button: #f0dbbc;
   --accent: #8a2dc8;
 }
@@ -37,53 +38,250 @@
 * {
   margin: 0;
   padding: 0;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   box-sizing: border-box;
 }
 
 html {
+  display: flex;
+  flex-direction: column;
   background-color: var(--background);
   color: var(--text);
 }
 
-#header {
+/* Header and navigation bar */
 
+#header {
+  position: sticky;
+  top: 0px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: var(--background);
+  z-index: 9999;
 }
 
 #header-img{
-    max-width: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  width: 80%;
+  margin: auto;
+  display: block
 
 }
 
 #nav-bar {
   display: flex;
-  justify-content: space-evenly;
-  background-color: var(--primary-button);
+  flex-direction: column;
+  align-items: center;
+  gap: 1em
 }
 
-.nav-link {
-  flex-grow: 1;
-  text-align: center;
+#nav-bar > *{
+  margin-top: 5px;
 }
 
-.nav-link a {
+a {
   text-decoration: none;
+  color: var(--text);
 }
 
+a:hover {
+  background-color: var(--secondary-button);
+}
+
+@media only screen and (min-width: 600px){
+
+  #header{
+    display: flex;
+    justify-content: space-between;
+
+  }
+
+  #header-img{
+    max-width: 300px;
+    margin-left: 0;
+
+  }
+
+  #nav-bar{
+    flex-direction: row;
+    padding-right: 20px;
+  }
+
+  #nav-bar > *{
+    margin: 0
+    }
+
+}
+
+
+
+/* Icons and features */
+
+.features{
+  display: flex;
+  margin: 3em auto;
+  max-width: 1000px;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20vw
+}
+
+.description{
+  width: 80vw;
+}
+
+i{
+  color: var(--accent);
+}
+
+.fa-fire::before {
+  content: "\f06d";
+}
+
+.fa-truck::before {
+  content: "\f0d1";
+}
+
+.fa-battery-full::before {
+  content: "\f240";
+}
+
+/* Hide icons when screen is too small */
+@media only screen and (max-width:550px){
+  .icon{
+    display: none
+  }
+
+  .description{
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Embedded video styling and responsiveness */
+
+.iframe-container {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+}
+
+iframe {
+  aspect-ratio: 16/9;
+  width: 100%;
+  max-width: 600px;
+}
+
+
+/* Email form and button styling */
 
 form{
   display: flex;
   flex-direction: column;
+  max-width: 70vw;
+  margin: 20px auto;
+  align-items: center;
 
 }
+
 #email{
+  min-height: 2em;
   max-width: 300px;
+  width: 100%;
 }
 
 .button{
-  max-width: 300px;
+  background-color: var(--primary-button);
+  color: var(--text);
+  font-size: large;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+  max-width: 160px;
+  width: 100%;
+  margin: 10px auto;
+}
+
+/* Pricing section */
+
+.pricing {
+  display: flex;
+  flex-direction: column;
+  margin: 3em auto;
+  text-align: center;
+  max-width: 40vw;
+}
+
+.pricing * + *{
+  margin-top: 20px ;
+}
+
+.pricing > div {
+  border: 1px solid black;
+  border-radius: 2px;
+}
+
+.pricing header {
+  background-color: var(--secondary-button);
+  color: var(--text);
+  font-size: 24px;
+  padding: 10px;
+}
+
+.pricing li{
+  list-style-type: none;
+}
+
+.package-button {
+  background-color: var(--primary-button);
+  color: var(--text);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.package-button:active {
+  background-color: var(--primary-button-darker);
+}
+
+
+@media only screen and (min-width: 550px){
+
+  .pricing{
+    flex-direction: row;
+    gap: 2em;
+    max-width: 1000px;
+    justify-content: center
+  }
+
+  .pricing > div{
+    min-width: 20vw;
+    margin: 0
+  }
+}
+
+/* Footer */
+
+footer{
+  background-color: var(--secondary-button);
+  padding: 20px;
+}
+footer ul{
+  display: flex;
+  justify-content: flex-end;
+}
+
+footer li{
+  padding: 10px;
+  list-style-type: none;
+}
+
+footer span{
+  display: flex;
+  justify-content: flex-end;
 }
