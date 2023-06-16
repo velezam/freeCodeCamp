@@ -170,6 +170,7 @@ form {
   max-width: 70vw;
   margin: 20px auto;
   align-items: center;
+  gap: 1rem;
 }
 
 #email {
@@ -187,7 +188,6 @@ form {
   border-radius: 5px;
   max-width: 160px;
   width: 100%;
-  margin: 10px auto;
 }
 
 /* Pricing section */
