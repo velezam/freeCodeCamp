@@ -19,10 +19,12 @@ function checkCashRegister(price, cash, cid) {
     total += cid[i][1];
   }
 
-  // Return {status: "INSUFFICIENT_FUNDS", change: []} if cash-in-drawer is less than the change due, or if you cannot return the exact change.
+  // Check if there is not enough cash in the drawer to provide the correct change, or if the drawer is empty
   if (total * 100 < changeDue) {
+    // Return an object indicating that there is not enough cash in the drawer
     return { status: "INSUFFICIENT_FUNDS", change: [] };
   } else if (total * 100 === changeDue) {
+    // Return an object indicating that the drawer is closed and no change is needed
     return { status: "CLOSED", change: cid };
   } else {
     // Create an array to hold the change to be returned
@@ -57,7 +59,6 @@ function checkCashRegister(price, cash, cid) {
     }
   }
 }
-
 
 // Test case 1: Exact change in drawer
 let result1 = checkCashRegister(5.0, 5.0, [
